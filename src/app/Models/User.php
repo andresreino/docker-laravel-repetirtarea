@@ -21,7 +21,26 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
+
+    public static function rules($userId = null)
+    {
+        return [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $userId,
+            'password' => 'required|min:8',
+            'role' => 'required'
+        ];
+    }
+
+    public static function roles() : array
+    {
+        return [
+            "taller" => "Taller",
+            "cliente" => "Cliente",
+        ];
+    }
 
     /**
      * The attributes that should be hidden for serialization.

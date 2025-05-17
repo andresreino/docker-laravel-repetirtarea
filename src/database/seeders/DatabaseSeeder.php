@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UserSeeder::class, // Llama al Seeder de Usuario
-            //CitaSeeder::class,   // Llama al Seeder de Cita
+            CitaSeeder::class,   // Llama al Seeder de Cita
         ]);
     }
 }
