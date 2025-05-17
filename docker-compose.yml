@@ -1,7 +1,7 @@
 services:
   db:
     image: mysql:9.0.1
-    container_name: laravel_db
+    container_name: laravel_db_repetirtarea
     ports:
       - "3306:3306"
     environment:
@@ -11,7 +11,7 @@ services:
       MYSQL_PASSWORD: devtest
       TZ: Europe/Madrid
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data_repetirtarea:/var/lib/mysql
     networks:
       - default
   
@@ -19,7 +19,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: laravel_app
+    container_name: laravel_app_repetirtarea
     working_dir: /var/www/html
     volumes:
       - ./src:/var/www/html
@@ -46,7 +46,7 @@ services:
   
   phpmyadmin:
     image: phpmyadmin:5.2.1
-    container_name: laravel_phpmyadmin
+    container_name: laravel_phpmyadmin_repetirtarea
     depends_on:
       - db
     links: 
@@ -59,4 +59,4 @@ services:
       TZ: Europe/Madrid
 
 volumes:
-  db_data:
+  db_data_repetirtarea:
