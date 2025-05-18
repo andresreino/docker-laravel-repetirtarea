@@ -6,16 +6,40 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" style="max-height: 50px;"/>
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Home') }}
                     </x-nav-link>
                 </div>
+                @if(auth()->check() && auth()->user()->role === 'taller')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                            {{ __('Usuarios') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('citas.index')" :active="request()->routeIs('citas.index')">
+                            {{ __('Citas') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('citas.pendientes')" :active="request()->routeIs('citas.pendientes')">
+                            {{ __('Citas pendientes') }}
+                        </x-nav-link>
+                    </div>
+                @endif
+                @if(auth()->check() && auth()->user()->role === 'cliente')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('citasclientes.index')" :active="request()->routeIs('citasclientes.index')">
+                            {{ __('Mis citas') }}
+                        </x-nav-link>
+                    </div>
+                @endif
             </div>
 
             <!-- Settings Dropdown -->
@@ -68,9 +92,34 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('Home') }}
             </x-responsive-nav-link>
         </div>
+        @if(auth()->check() && auth()->user()->role === 'taller')
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                {{ __('Usuarios') }}
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('citas.index')" :active="request()->routeIs('citas.index')">
+                {{ __('Citas') }}
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('citas.pendientes')" :active="request()->routeIs('citas.pendientes')">
+                {{ __('Citas pendientes') }}
+            </x-responsive-nav-link>
+        </div>
+        @endif
+        
+        @if(auth()->check() && auth()->user()->role === 'cliente')
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('citasclientes.index')" :active="request()->routeIs('citasclientes.index')">
+                {{ __('Mis citas') }}
+            </x-responsive-nav-link>
+        </div>
+        @endif
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
